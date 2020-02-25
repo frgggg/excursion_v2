@@ -26,7 +26,7 @@ services:
       - postgres
 
   place:
-  container_name: place
+    container_name: place
     build:
         context: .
         dockerfile: ./excursions-places/docker/Dockerfile
