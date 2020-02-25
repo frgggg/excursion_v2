@@ -1,7 +1,8 @@
 #!/bin/bash
 set -e
+echo "Multiple databases start"
 
-psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" -d "$POSTGRES_DB" <<-EOSQL
+psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" <<-EOSQL
 
 -- for excursion service
 create user e_e with password 'e_e';
@@ -19,3 +20,5 @@ create database e_p;
 grant all privileges on database e_p to e_p;
 
 EOSQL
+
+echo "Multiple databases stop"

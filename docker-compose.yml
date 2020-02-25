@@ -8,9 +8,9 @@ services:
     ports:
       - 8090:8090
     depends_on:
-        - postgres-db
+      - postgres
     links:
-      - postgres-db
+      - postgres
 
   user:
     build:
@@ -19,9 +19,9 @@ services:
     ports:
       - 8070:8070
     depends_on:
-        - postgres-db
+      - postgres
     links:
-      - postgres-db
+      - postgres
 
   place:
     build:
@@ -30,22 +30,25 @@ services:
     ports:
       - 8080:8080
     depends_on:
-        - postgres-db
+      - postgres
     links:
-      - postgres-db
+      - postgres
 
-  postgres-db:
-    #image: postgres:9.6-alpine
+  postgres:
+    container_name: postgres
     build:
         context: .
         dockerfile: ./db/Dockerfile
     ports:
-      - 5431:5432
+      - 5432:5432
     environment:
       POSTGRES_USER: 'postgres'
       POSTGRES_PASSWORD: 'postgres'
-    volumes:
-      - ./init:/docker-entrypoint-initdb.d/
+      POSTGRES_DB: 'store'
+    #volumes:
+        #- /shared_folder/postgresql:/var/lib/postgresql
+        #- ./db-init-scripts:/docker-entrypoint-initdb.d
+        #- ./usr/local/bin/init-user-db.sh
 
 #container_name: postgres_items
 
