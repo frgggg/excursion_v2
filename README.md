@@ -11,3 +11,6 @@
 
 # docker
 in process
+
+# reserve git (before 25.02.20 17-00):
+https://github.com/frgggg/excursions/tree/all-service-and-docker
