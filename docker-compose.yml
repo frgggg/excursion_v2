@@ -1,0 +1,51 @@
+version: '2'
+
+services:
+  excursion:
+    build:
+        context: .
+        dockerfile: ./excursions-excursions/docker/Dockerfile
+    ports:
+      - 8090:8090
+    depends_on:
+        - postgres-db
+    links:
+      - postgres-db
+
+  user:
+    build:
+        context: .
+        dockerfile: ./excursions-users/docker/Dockerfile
+    ports:
+      - 8070:8070
+    depends_on:
+        - postgres-db
+    links:
+      - postgres-db
+
+  place:
+    build:
+        context: .
+        dockerfile: ./excursions-places/docker/Dockerfile
+    ports:
+      - 8080:8080
+    depends_on:
+        - postgres-db
+    links:
+      - postgres-db
+
+  postgres-db:
+    #image: postgres:9.6-alpine
+    build:
+        context: .
+        dockerfile: ./db/Dockerfile
+    ports:
+      - 5431:5432
+    environment:
+      POSTGRES_USER: 'postgres'
+      POSTGRES_PASSWORD: 'postgres'
+    volumes:
+      - ./init:/docker-entrypoint-initdb.d/
+
+#container_name: postgres_items
+
