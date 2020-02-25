@@ -2,6 +2,7 @@ version: '2'
 
 services:
   excursion:
+    container_name: excursion
     build:
         context: .
         dockerfile: ./excursions-excursions/docker/Dockerfile
@@ -13,6 +14,7 @@ services:
       - postgres
 
   user:
+    container_name: user
     build:
         context: .
         dockerfile: ./excursions-users/docker/Dockerfile
@@ -24,6 +26,7 @@ services:
       - postgres
 
   place:
+  container_name: place
     build:
         context: .
         dockerfile: ./excursions-places/docker/Dockerfile
